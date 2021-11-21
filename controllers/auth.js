@@ -44,11 +44,9 @@ const createUser = async (req, res=response) => {
         /*res: esto es lo que yo programado, mi backend responde*/
         return res.status(201).json({
             ok:true ,
-            msg: user.id,
+            uid: user.id,
             name: user.name,
             token: token
-
-        
     })
         
     } catch (error) { 
@@ -59,11 +57,7 @@ const createUser = async (req, res=response) => {
         })
              
     }
-
-
 }
-
-
 
 // 2)
 
@@ -79,20 +73,20 @@ const loginUser = async  (req, res=response) => {
 
         if(!user){
             return res.status(400).json({
-                on:false,
+                ok:false,
                 msg: "This user does not exist"
             })
         } 
 
     // se que el usuario existe, confirmar password. compara el que escribe, con el que tengo en la DB.
 
-    const validPassword = bcrypt.compareSync(password, user.password );
+        const validPassword = bcrypt.compareSync(password, user.password );
 
-    if(!validPassword){
-        return res.status(400).json({
-            ok: false,
-            msg: "Email or password incorrect"
-        });
+        if(!validPassword){
+            res.status(400).json({
+                ok: false,
+                msg: "Email or password incorrect"
+            });
     }
 
 
@@ -131,7 +125,9 @@ const renewToken = async(req, res=response) => {
 
     return res.json({
         ok:true,
-       token
+        uid,
+        name,
+        token
     })
 
 }
