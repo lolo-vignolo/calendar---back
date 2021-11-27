@@ -126,6 +126,7 @@ const eliminarEvento = async(req, res=response) =>{
                 msg : "You do not have the autorization"
             });
         }
+        
         const eventToEliminate = await Event.findByIdAndDelete(eventId)
 
                 res.status(201).json({
