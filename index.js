@@ -38,7 +38,9 @@ Se trabaja en POSTMAN por que es mas util y mejor la visualización.*/
 /*todo lo que el arquivo exporte de lo puesto en el require, lo va a hacer en la ruta que puse "/api/auth" */
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
-
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'build', 'index.html'));
+  });
 
 
 //TODO 2: CRUD: Eventos
